@@ -1,11 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useJobContext } from "../Context/JobContext";
 
 function SingleJob() {
-  const { singleJob, isSingleLoading, getSingleJob, addToApplied } =
+  const { singleJob, isSingleLoading, getSingleJob, addToApplied, applied } =
     useJobContext();
   const { id } = useParams();
+
+  const [isJobPreviouslyApplied, setIsJobPreviouslyApplied] = useState(false);
+  const [isAppliedNow, setIsAppliedNow] = useState(false);
+
+  const handleClick = () => {
+    addToApplied(singleJob);
+    setIsAppliedNow(true);
+  };
 
   const {
     position,
@@ -24,6 +32,8 @@ function SingleJob() {
 
   useEffect(() => {
     getSingleJob(id);
+    const isTrue = applied.some((job) => job.id == id);
+    setIsJobPreviouslyApplied(isTrue);
   }, []);
 
   if (isSingleLoading) {
@@ -57,10 +67,13 @@ function SingleJob() {
         </div>
       </div>
       <button
-        onClick={() => addToApplied(singleJob)}
-        className="bg-black text-white flex place-self-end mr-[1.5%] px-4 py-2 rounded-lg w-1/9 mt-4 hover:bg-[#7A7A7A] transition duration-300"
+        onClick={handleClick}
+        disabled={isAppliedNow || isJobPreviouslyApplied}
+        className={`${
+          isAppliedNow || isJobPreviouslyApplied ? "bg-[#7A7A7A]" : "bg-black"
+        } text-white flex place-self-end mr-[1.5%] px-4 py-2 rounded-lg w-1/9 mt-4 hover:bg-[#7A7A7A] transition duration-300`}
       >
-        Apply
+        {isAppliedNow || isJobPreviouslyApplied ? `Applied` : `Apply`}
       </button>
     </div>
   );

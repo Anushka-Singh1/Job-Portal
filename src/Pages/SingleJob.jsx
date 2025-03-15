@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { useJobContext } from "../Context/JobContext";
 
 function SingleJob() {
-  const { singleJob, isSingleLoading, getSingleJob } = useJobContext();
+  const { singleJob, isSingleLoading, getSingleJob, addToApplied } =
+    useJobContext();
   const { id } = useParams();
 
   const {
@@ -55,9 +56,12 @@ function SingleJob() {
           <hr className="border-2 border-black my-4 w-90 max-w-[100%]" />
         </div>
       </div>
-      <div className="bg-black text-white flex place-self-end mr-[1.5%] px-4 py-2 rounded-lg w-1/9 mt-4 hover:bg-[#7A7A7A] transition duration-300">
+      <button
+        onClick={() => addToApplied(singleJob)}
+        className="bg-black text-white flex place-self-end mr-[1.5%] px-4 py-2 rounded-lg w-1/9 mt-4 hover:bg-[#7A7A7A] transition duration-300"
+      >
         Apply
-      </div>
+      </button>
     </div>
   );
 }

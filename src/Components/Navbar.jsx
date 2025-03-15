@@ -4,6 +4,7 @@ import { FaHome } from "react-icons/fa";
 import { IoNewspaper } from "react-icons/io5";
 import { PiHamburgerLight } from "react-icons/pi";
 import { MdOutlineClose } from "react-icons/md";
+import { SiTicktick } from "react-icons/si";
 import Image from "../assets/job.svg";
 
 function Navbar() {
@@ -12,6 +13,11 @@ function Navbar() {
   const navItems = [
     { to: "/", icon: <FaHome className="h-6 w-8" />, label: "Home" },
     { to: "/about", icon: <IoNewspaper className="h-6 w-8" />, label: "About" },
+    {
+      to: "/applied",
+      icon: <SiTicktick className="h-6 w-8" />,
+      label: "Applied Jobs",
+    },
   ];
 
   return (

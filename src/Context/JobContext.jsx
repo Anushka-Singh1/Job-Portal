@@ -10,6 +10,7 @@ const API = "https://jsonplaceholder.typicode.com/posts";
 const initialState = {
   isLoading: false,
   jobs: [],
+  applied: [],
   isError: false,
   isSingleLoading: false,
   singleJob: {},
@@ -54,8 +55,13 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     getJobs(API);
   }, []);
+
+   const addToApplied = (job) => {
+     dispatch({ type: "ADD_TO_APPLIED", payload: job });
+  };
+  
   return (
-    <AppContext.Provider value={{ ...state, getSingleJob }}>
+    <AppContext.Provider value={{ ...state, getSingleJob, addToApplied }}>
       {children}
     </AppContext.Provider>
   );

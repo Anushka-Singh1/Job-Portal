@@ -23,7 +23,7 @@ To run this project locally, follow these steps:
    ```
 2. Navigate to the project folder:
    ```bash
-   cd job-portal
+   cd Job-Portal
    ```
 3. Install dependencies:
    ```bash

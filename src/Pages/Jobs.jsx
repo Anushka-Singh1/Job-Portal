@@ -13,10 +13,8 @@ function Jobs() {
         </div>
         <div className="lg:col-span-5 bg-gray-100 rounded-xl scrollbar-hide overflow-auto">
           <div className="sticky shadow-md top-0 p-4 rounded-t-md bg-gray-100 overflow-hidden">
-            <div className="bg-gray-100 rounded-xl ">
-              <div className="self-center text-center">
-                <p>{filter_jobs ? filter_jobs.length : 0} Jobs Found</p>
-              </div>
+            <div className="self-center text-center">
+              <p>{filter_jobs ? filter_jobs.length : 0} Jobs Found</p>
             </div>
           </div>
           <div className="overflow overflow-auto">

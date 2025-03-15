@@ -1,26 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useJobContext } from "../Context/JobContext";
+import { NavLink } from "react-router-dom";
 
 function SingleJob() {
-  const { singleJob, isSingleLoading, getSingleJob, addToApplied, applied } =
-    useJobContext();
+  const { singleJob, isSingleLoading, getSingleJob, applied } = useJobContext();
   const { id } = useParams();
 
   const [isJobPreviouslyApplied, setIsJobPreviouslyApplied] = useState(false);
-  const [isAppliedNow, setIsAppliedNow] = useState(false);
-
-  const handleClick = () => {
-    addToApplied(singleJob);
-    setIsAppliedNow(true);
-  };
-
+ 
   const {
     position,
-    title,
     body,
     company,
-    featured,
     role,
     level,
     postedAt,
@@ -56,25 +48,31 @@ function SingleJob() {
             {company}, {location}
           </p>
           <p className="text-gray-700 font-bold">Job Description</p>
-          <p className="text-gray-700 mb-4">{body}</p>
+          <p className="text-gray-700 mb-4 text-justify">{body}</p>
 
           <p className="text-gray-700 font-bold">Job Specifications</p>
           <p className="text-gray-700">{role}</p>
           <p className="text-gray-700">{level}</p>
           <p className="text-gray-700">{contract}</p>
+          <p className="text-gray-700 mt-4 font-bold">
+            Skill and Tools Requirement
+          </p>
+          <p className="text-gray-700">{languages && languages.join(" ")}</p>
+          <p className="text-gray-700">{tools && tools.join(" ")}</p>
 
           <hr className="border-2 border-black my-4 w-90 max-w-[100%]" />
         </div>
       </div>
-      <button
-        onClick={handleClick}
-        disabled={isAppliedNow || isJobPreviouslyApplied}
-        className={`${
-          isAppliedNow || isJobPreviouslyApplied ? "bg-[#7A7A7A]" : "bg-black"
-        } text-white flex place-self-end mr-[1.5%] px-4 py-2 rounded-lg w-1/9 mt-4 hover:bg-[#7A7A7A] transition duration-300`}
-      >
-        {isAppliedNow || isJobPreviouslyApplied ? `Applied` : `Apply`}
-      </button>
+      <NavLink to={`/${id}/apply`}>
+        <button
+          disabled={isJobPreviouslyApplied}
+          className={`${
+            isJobPreviouslyApplied ? "bg-[#7A7A7A]" : "bg-black"
+          } text-white flex place-self-end mr-[1.5%] px-4 py-2 rounded-lg w-1/9 mt-4 hover:bg-[#7A7A7A] transition duration-300`}
+        >
+          {isJobPreviouslyApplied ? `Applied` : `Apply`}
+        </button>
+      </NavLink>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { IoNewspaper } from "react-icons/io5";
-import { PiHamburgerLight } from "react-icons/pi";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineClose } from "react-icons/md";
 import { SiTicktick } from "react-icons/si";
 import Image from "../assets/job.svg";
@@ -24,11 +24,7 @@ function Navbar() {
     <div className="bg-[#000000] h-[10vh] flex justify-between items-center px-[2rem] fixed top-0 left-2 right-2 z-[99999] rounded-lg mt-[3vh] mx-[2%]">
       <div className="flex items-center">
         <NavLink to="/">
-          <img
-            src={Image}
-            alt="error"
-            className="w-[17%] object-cover"
-          />
+          <img src={Image} alt="error" className="w-[17%] object-cover" />
         </NavLink>
       </div>
 
@@ -60,7 +56,7 @@ function Navbar() {
             onClick={() => setIsMenuOpen(false)}
           />
         ) : (
-          <PiHamburgerLight
+          <GiHamburgerMenu
             className="h-8 w-8 text-white cursor-pointer"
             onClick={() => setIsMenuOpen(true)}
           />

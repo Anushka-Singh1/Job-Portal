@@ -6,23 +6,19 @@ const AppliedJobs = () => {
   const { applied } = useJobContext();
 
   return (
-    <div>
-      <div className="gap-4 pl-[2.5%] pr-[2.5%] pb-[2.5%] pt-48 h-screen overflow-hidden">
-        <div className="bg-gray-100 rounded-xl scrollbar-hide overflow-auto">
+    <>
+      <div className="gap-4 px-[2.5%] pt-48 h-screen overflow-hidden">
+        <div className="bg-gray-100 rounded-xl h-full scrollbar-hide overflow overflow-auto">
           <div className="sticky shadow-md top-0 p-4 rounded-t-md bg-gray-100 overflow-hidden">
-            <div className="bg-gray-100 rounded-xl ">
-              <div className="self-center text-center text-2xl">
-                {applied.length === 0 ? `No Applied Jobs` : `Applied Jobs`}
-              </div>
+            <div className="self-center text-center text-2xl">
+              {applied.length === 0 ? `No Applied Jobs` : `Applied Jobs`}
             </div>
           </div>
           <div className="overflow overflow-auto">
-            <div className="grid grid-cols-1 min-[840px]:grid-cols-2 h-full overflow-auto">
+            <div className="grid grid-cols-1 min-[840px]:grid-cols-2 overflow-auto">
               {applied.map((job) => {
                 const {
                   id,
-                  title,
-                  body,
                   role,
                   contract,
                   location,
@@ -59,7 +55,7 @@ const AppliedJobs = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

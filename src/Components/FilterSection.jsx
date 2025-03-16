@@ -1,5 +1,7 @@
 import React from "react";
 import { useFilterContext } from "../Context/FilterContext";
+import { IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonButton } from '@ionic/react';
+import './FilterSection.css';
 
 function FilterSection() {
   const {
@@ -23,11 +25,11 @@ function FilterSection() {
   const locationData = getUniqueData(all_jobs, "location");
 
   return (
-    <>
-      <div className="overflow-scroll scrollbar-hide max-h-full">
-        <div>
-          <h3 className="text-center mb-2 mt-2 font-josefin">Contract</h3>
-          <div className="flex flex-col bg-black rounded-lg text-white">
+    <div className="filter-section">
+      <IonList className="ion-no-padding">
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-3 text-gray-800">Contract Type</h3>
+          <div className="flex flex-col space-y-2">
             {contractData.map((curElem, index) => {
               const isSelected = contract === curElem;
               return (
@@ -37,8 +39,10 @@ function FilterSection() {
                   onClick={updateFilterValue}
                   name="contract"
                   value={curElem}
-                  className={`focus:outline-none focus:ring-0 my-1 font-josefin ${
-                    isSelected ? "bg-white text-black" : ""
+                  className={`px-4 py-2 rounded-lg transition-all duration-200 ${
+                    isSelected 
+                      ? "bg-black text-white" 
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   {curElem}
@@ -48,72 +52,53 @@ function FilterSection() {
           </div>
         </div>
 
-        <div>
-          <h3 className="text-center mb-2 mt-2 font-josefin">Roles</h3>
-          <div className="flex justify-center">
-            <form action="#" className="w-full">
-              <select
-                className="w-full border-2 pt-1.5 pb-0.5 border-black rounded-lg focus:outline-none focus:ring-0"
-                name="role"
-                id="role"
-                onChange={updateFilterValue}
-                value={role}
-              >
-                {roleData.map((curElem, index) => {
-                  return (
-                    <option
-                      key={index}
-                      name="role"
-                      value={curElem}
-                      className={role === curElem ? "bg-black text-white" : ""}
-                    >
-                      {curElem}
-                    </option>
-                  );
-                })}
-              </select>
-            </form>
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-center mb-2 mt-2 font-josefin">Location</h3>
-          <div className="flex justify-center">
-            <form action="#" className="w-full">
-              <select
-                className="w-full border-2 pt-1.5 pb-0.5 border-black rounded-lg focus:outline-none focus:ring-0"
-                name="location"
-                id="location"
-                onChange={updateFilterValue}
-                value={location}
-              >
-                {locationData.map((curElem, index) => {
-                  return (
-                    <option
-                      key={index}
-                      name="location"
-                      value={curElem}
-                      className={role === curElem ? "bg-black text-white" : ""}
-                    >
-                      {curElem}
-                    </option>
-                  );
-                })}
-              </select>
-            </form>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap mt-4 mb-4 justify-center">
-          <button
-            className="rounded-lg bg-black text-white px-4 p-1"
-            onClick={clearFilters}
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-3 text-gray-800">Role</h3>
+          <IonSelect
+            className="w-full bg-gray-100 rounded-lg"
+            name="role"
+            value={role}
+            onIonChange={(e) => updateFilterValue({ target: { name: 'role', value: e.detail.value } })}
+            interface="popover"
           >
-            Clear Filter
-          </button>
+            {roleData.map((curElem, index) => (
+              <IonSelectOption key={index} value={curElem}>
+                {curElem}
+              </IonSelectOption>
+            ))}
+          </IonSelect>
         </div>
-      </div>
-    </>
+
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-3 text-gray-800">Location</h3>
+          <IonSelect
+            className="w-full bg-gray-100 rounded-lg"
+            name="location"
+            value={location}
+            onIonChange={(e) => updateFilterValue({ target: { name: 'location', value: e.detail.value } })}
+            interface="popover"
+          >
+            {locationData.map((curElem, index) => (
+              <IonSelectOption key={index} value={curElem}>
+                {curElem}
+              </IonSelectOption>
+            ))}
+          </IonSelect>
+        </div>
+
+        <div className="flex justify-center mt-6">
+          <IonButton
+            fill="solid"
+            color="dark"
+            expand="block"
+            onClick={clearFilters}
+            className="w-full"
+          >
+            Clear Filters
+          </IonButton>
+        </div>
+      </IonList>
+    </div>
   );
 }
 

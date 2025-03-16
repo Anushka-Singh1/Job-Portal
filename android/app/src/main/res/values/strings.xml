@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Job Portal</string>
+    <string name="title_activity_main">Job Portal</string>
+    <string name="package_name">com.jobportal.app</string>
+    <string name="custom_url_scheme">com.jobportal.app</string>
+</resources>

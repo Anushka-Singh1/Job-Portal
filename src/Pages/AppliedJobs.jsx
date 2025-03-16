@@ -1,61 +1,80 @@
 import React from "react";
 import { useJobContext } from "../Context/JobContext";
-import { NavLink } from "react-router-dom";
+import { 
+  IonContent, 
+  IonPage, 
+  IonFooter,
+  IonCard,
+  IonCardContent,
+  IonChip,
+  IonLabel
+} from '@ionic/react';
+import Footer from "../Components/Footer";
 
 const AppliedJobs = () => {
   const { applied } = useJobContext();
 
   return (
-    <>
-      <div className="gap-4 px-[2.5%] pt-48 h-screen overflow-hidden">
-        <div className="bg-gray-100 rounded-xl h-full scrollbar-hide overflow overflow-auto">
-          <div className="sticky shadow-md top-0 p-4 rounded-t-md bg-gray-100 overflow-hidden">
-            <div className="self-center text-center text-2xl">
-              {applied.length === 0 ? `No Applied Jobs` : `Applied Jobs`}
+    <IonPage>
+      <IonContent>
+        <div className="container mx-auto p-4">
+          <div className="bg-white rounded-lg shadow-sm">
+            <div className="p-4 border-b">
+              <h2 className="text-2xl font-bold text-center">
+                {applied.length === 0 ? `No Applied Jobs` : `Applied Jobs`}
+              </h2>
             </div>
-          </div>
-          <div className="overflow overflow-auto">
-            <div className="grid grid-cols-1 min-[840px]:grid-cols-2 overflow-auto">
-              {applied.map((job) => {
-                const {
-                  id,
-                  role,
-                  contract,
-                  location,
-                  position,
-                  company,
-                } = job;
-                return (
-                  <NavLink to={`/SingleJob/${id}`}>
-                    <div key={id} className="bg-gray-400 m-4 rounded-lg">
-                      <div className="flex flex-col justify-between p-4 w-full">
-                        <h1 className="text-lg md:text-xl font-semibold font-josefin mb-2">
-                          {position}
-                        </h1>
-                        <h2 className="text-sm md:text-sm font-semibold font-josefin mb-2">
-                          {company}
-                        </h2>
-                        <div className="flex flex-row gap-2">
-                          <div className="bg-black text-white px-4 py-2 rounded-lg mt-4 hover:bg-[#7A7A7A] transition duration-300">
-                            {role}
-                          </div>
-                          <div className="bg-black text-white px-4 py-2 rounded-lg mt-4 hover:bg-[#7A7A7A] transition duration-300">
-                            {contract}
-                          </div>
-                          <div className="bg-black text-white px-4 py-2 rounded-lg mt-4 hover:bg-[#7A7A7A] transition duration-300">
-                            {location}
+            <div className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {applied.map((job) => {
+                  const {
+                    id,
+                    role,
+                    contract,
+                    location,
+                    position,
+                    company,
+                  } = job;
+                  return (
+                    <IonCard 
+                      key={id} 
+                      routerLink={`/singlejob/${id}`}
+                      button
+                      className="ion-no-margin"
+                    >
+                      <IonCardContent>
+                        <div className="flex flex-col">
+                          <h3 className="text-xl font-semibold mb-2">
+                            {position}
+                          </h3>
+                          <h4 className="text-lg font-medium mb-4">
+                            {company}
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            <IonChip color="dark">
+                              <IonLabel>{role}</IonLabel>
+                            </IonChip>
+                            <IonChip color="dark">
+                              <IonLabel>{contract}</IonLabel>
+                            </IonChip>
+                            <IonChip color="dark">
+                              <IonLabel>{location}</IonLabel>
+                            </IonChip>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </NavLink>
-                );
-              })}
+                      </IonCardContent>
+                    </IonCard>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </>
+      </IonContent>
+      <IonFooter>
+        <Footer />
+      </IonFooter>
+    </IonPage>
   );
 };
 

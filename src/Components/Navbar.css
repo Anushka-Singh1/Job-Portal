@@ -1,0 +1,81 @@
+.selected {
+  --background: rgba(0, 0, 0, 0.1);
+  --color: var(--ion-color-dark);
+}
+
+ion-menu ion-content {
+  --background: var(--ion-item-background, var(--ion-background-color, #fff));
+  --padding-top: 20px;
+}
+
+ion-menu ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 48px;
+  --background: transparent;
+  --color: var(--ion-color-dark);
+}
+
+ion-menu ion-item:hover {
+  --background: rgba(0, 0, 0, 0.05);
+}
+
+ion-menu ion-item.selected {
+  --background: rgba(0, 0, 0, 0.1);
+  --color: var(--ion-color-dark);
+}
+
+ion-button.selected {
+  --color: var(--ion-color-primary);
+}
+
+.navbar-toolbar {
+  --background: #1f1f1f;
+  --color: white;
+  --min-height: 56px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-button {
+  --color: white;
+  margin: 0;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.logo-button {
+  --padding-start: 0;
+  --padding-end: 0;
+  --color: white;
+  height: 56px;
+  margin: 0;
+}
+
+ion-header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ion-header.md::after {
+  display: none;
+}
+
+ion-title {
+  text-align: center;
+}
+
+.ios ion-toolbar {
+  --padding-top: 20px;
+}
+
+.ios ion-menu ion-item {
+  --padding-start: 20px;
+  --padding-end: 20px;
+} 

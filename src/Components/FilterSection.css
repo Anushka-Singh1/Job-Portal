@@ -1,0 +1,38 @@
+.filter-section {
+  padding: 1rem;
+}
+
+.filter-section ion-select {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --border-radius: 8px;
+  --background: var(--ion-color-light);
+}
+
+.filter-section ion-select::part(icon) {
+  color: var(--ion-color-dark);
+  opacity: 1;
+}
+
+.filter-section ion-button {
+  --border-radius: 8px;
+  --box-shadow: none;
+  margin: 0;
+}
+
+.filter-section ion-list {
+  background: transparent;
+}
+
+.filter-section ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --background: transparent;
+}
+
+.filter-section h3 {
+  margin: 0;
+  font-weight: 500;
+} 

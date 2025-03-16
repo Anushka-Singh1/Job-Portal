@@ -1,10 +1,15 @@
 import React from "react";
+import { IonFooter, IonToolbar, IonTitle } from '@ionic/react';
 
 function Footer() {
   return (
-    <div className="justify-self-end self-end bg-black text-white w-full h-8 mt-8 flex justify-center items-center text-center font-semibold font serif">
-      &copy; 2025 Job Listing Portal. All rights reserved.
-    </div>
+    <IonFooter className="ion-no-border">
+      <IonToolbar color="dark" className="text-center">
+        <IonTitle size="small">
+          &copy; 2025 Job Listing Portal. All rights reserved.
+        </IonTitle>
+      </IonToolbar>
+    </IonFooter>
   );
 }
 

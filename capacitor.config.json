@@ -1,0 +1,5 @@
+{
+  "appId": "com.jobportal.app",
+  "appName": "Job Portal",
+  "webDir": "dist"
+}

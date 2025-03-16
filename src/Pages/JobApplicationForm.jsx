@@ -1,108 +1,174 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useJobContext } from "../Context/JobContext";
+import { 
+  IonPage, 
+  IonContent, 
+  IonItem, 
+  IonLabel, 
+  IonInput, 
+  IonButton, 
+  IonSpinner,
+  IonCard,
+  IonCardContent,
+  IonFooter,
+  useIonToast
+} from '@ionic/react';
+import Footer from "../Components/Footer";
 
 const JobApplicationForm = () => {
   const { id } = useParams();
-  const { singleJob, isSingleLoading, getSingleJob, addToApplied, applied } =
-    useJobContext();
-  const { position, company, postedAt, location } = singleJob;
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    resumeLink: "",
+  const history = useHistory();
+  const [present] = useIonToast();
+  const { singleJob, isSingleLoading, getSingleJob, addToApplied } = useJobContext();
+  const [formState, setFormState] = useState({
+    name: '',
+    resumeLink: '',
+    isSubmitting: false
   });
 
   useEffect(() => {
-    getSingleJob(id);
-  }, []);
+    const fetchData = async () => {
+      if (id) {
+        await getSingleJob(id);
+      }
+    };
+    fetchData();
+  }, [id, getSingleJob]);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleInputChange = (field, value) => {
+    setFormState(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { name, resumeLink } = formState;
+
+    if (!name.trim() || !resumeLink.trim()) {
+      await present({
+        message: 'Please fill in all fields',
+        duration: 2000,
+        position: 'bottom',
+        color: 'warning'
+      });
+      return;
+    }
+
+    setFormState(prev => ({ ...prev, isSubmitting: true }));
+    
     try {
       const response = await axios.post(
         "https://jsonplaceholder.typicode.com/posts",
-        formData
+        { name, resumeLink }
       );
-      console.log(response);
-      if (response.status == 201) {
+      if (response.status === 201) {
         addToApplied(singleJob);
-        alert("Application submitted successfully!");
-        navigate("/");
+        await present({
+          message: 'Application submitted successfully!',
+          duration: 2000,
+          position: 'bottom',
+          color: 'success'
+        });
+        history.push("/jobs");
       } else {
-        alert("Failed to submit application. Try again.");
+        throw new Error('Submission failed');
       }
     } catch (error) {
-      alert("Failed to submit application. Try again.");
+      await present({
+        message: 'Failed to submit application. Please try again.',
+        duration: 2000,
+        position: 'bottom',
+        color: 'danger'
+      });
+    } finally {
+      setFormState(prev => ({ ...prev, isSubmitting: false }));
     }
   };
 
-  if (isSingleLoading) {
+  if (isSingleLoading || !singleJob?.position) {
     return (
-      <div className="p-4 mx-[5vh] mt-4 bg-black rounded-lg font-josefin font-semibold text-center">
-        ......loading
-      </div>
+      <IonPage>
+        <IonContent>
+          <div className="flex items-center justify-center h-full">
+            <IonSpinner name="circular" />
+          </div>
+        </IonContent>
+      </IonPage>
     );
   }
 
-  return (
-    <div className="p-6 mt-36 grid grid-cols-1 min-[840px]:grid-cols-2">
-      <div className="flex flex-wrap lg:flex-nowrap mt-6">
-        <div className="w-full bg-white p-6 rounded-lg shadow-lg mx-[1.5%]">
-          <div className="flex flex-row justify-between">
-            <p className="text-black text-xl font-bold">{position}</p>
-            <p className="text-gray-700 mr-4">Posted {postedAt}</p>
-          </div>
-          <p className="text-gray-700 mb-4 font-bold">
-            {company}, {location}
-          </p>
-        </div>
-      </div>
-      <div className="flex flex-wrap lg:flex-nowrap mt-6">
-        <div className="w-full bg-white p-6 rounded-lg shadow-lg mx-[1.5%]">
-          <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
-            <div>
-              <label className="block font-medium text-gray-700">Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-black"
-              />
-            </div>
-            <div>
-              <label className="block font-medium text-gray-700">
-                Resume Link
-              </label>
-              <input
-                type="url"
-                name="resumeLink"
-                value={formData.resumeLink}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-black"
-              />
-            </div>
+  const { position, company, postedAt, location } = singleJob;
 
-            <button
-              type="submit"
-              className="place-self-center p-2 text-white font-semibold rounded-lg bg-black hover:bg-[#7A7A7A]"
-            >
-              Submit Application
-            </button>
-          </form>
+  return (
+    <IonPage>
+      <IonContent>
+        <div className="container mx-auto p-4 mt-16">
+          <div className="grid md:grid-cols-2 gap-4">
+            <IonCard>
+              <IonCardContent>
+                <div className="flex flex-col">
+                  <h1 className="text-2xl font-bold text-black mb-2">{position}</h1>
+                  <p className="text-gray-700 mb-2">Posted {postedAt}</p>
+                  <p className="text-lg font-semibold text-gray-800">
+                    {company}, {location}
+                  </p>
+                </div>
+              </IonCardContent>
+            </IonCard>
+
+            <IonCard>
+              <IonCardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <IonItem>
+                    <IonLabel position="floating">Name</IonLabel>
+                    <IonInput
+                      value={formState.name}
+                      onIonInput={e => handleInputChange('name', e.detail.value)}
+                      required
+                      type="text"
+                      placeholder="Enter your full name"
+                    />
+                  </IonItem>
+
+                  <IonItem>
+                    <IonLabel position="floating">Resume Link</IonLabel>
+                    <IonInput
+                      value={formState.resumeLink}
+                      onIonInput={e => handleInputChange('resumeLink', e.detail.value)}
+                      required
+                      type="url"
+                      placeholder="Enter your resume URL"
+                    />
+                  </IonItem>
+
+                  <div className="flex justify-center mt-6">
+                    <IonButton
+                      type="submit"
+                      color="dark"
+                      expand="block"
+                      disabled={formState.isSubmitting}
+                    >
+                      {formState.isSubmitting ? (
+                        <IonSpinner name="dots" />
+                      ) : (
+                        'Submit Application'
+                      )}
+                    </IonButton>
+                  </div>
+                </form>
+              </IonCardContent>
+            </IonCard>
+          </div>
         </div>
-      </div>
-    </div>
+      </IonContent>
+      <IonFooter>
+        <Footer />
+      </IonFooter>
+    </IonPage>
   );
 };
 

@@ -36,7 +36,7 @@ function Navbar() {
             className={location.pathname === item.to ? 'selected' : ''}
             button
           >
-            <div className="flex items-center w-full py-2">
+            <div className="flex items-end mr-2 w-full py-2 ">
               {item.icon}
               <IonLabel className="ml-2">{item.label}</IonLabel>
             </div>

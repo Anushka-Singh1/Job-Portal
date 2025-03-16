@@ -49,26 +49,24 @@ function App() {
           </IonMenu>
           
           <div className="ion-page" id="main">
-            <IonHeader className="ion-no-border" translucent>
+            <IonHeader className="ion-no-border">
               <IonToolbar className="navbar-toolbar">
                 <IonButtons slot="start">
                   <IonMenuButton />
                 </IonButtons>
-                <IonTitle>
-                  <div className="logo-container">
-                    <IonButton 
-                      routerLink="/" 
-                      routerDirection="root" 
-                      fill="clear"
-                      className="logo-button"
-                    >
-                      <img src={Image} alt="logo" className="h-8" />
-                    </IonButton>
-                  </div>
-                </IonTitle>
+                <IonButtons slot="end">
+                  <IonButton 
+                    routerLink="/" 
+                    routerDirection="root" 
+                    fill="clear"
+                    className="logo-button"
+                  >
+                    <img src={Image} alt="logo" className="h-8" />
+                  </IonButton>
+                </IonButtons>
               </IonToolbar>
             </IonHeader>
-            <IonContent fullscreen scrollY={true}>
+            <IonContent className="ion-padding-top">
               <IonRouterOutlet>
                 <Route exact path="/" render={() => <Redirect to="/jobs" />} />
                 <Route exact path="/jobs" component={Jobs} />

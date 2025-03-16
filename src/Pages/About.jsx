@@ -5,8 +5,8 @@ import Footer from "../Components/Footer";
 const About = () => {
   return (
     <IonPage>
-      <IonContent>
-        <div className="container mx-auto px-4 py-8">
+      <IonContent className="ion-padding">
+        <div className="container mx-auto">
           <h1 className="text-4xl font-bold mb-6">About Us</h1>
           <div className="bg-white rounded-lg shadow-sm p-6">
             <p className="text-gray-700 mb-4">

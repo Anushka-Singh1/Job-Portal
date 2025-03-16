@@ -16,8 +16,8 @@ const AppliedJobs = () => {
 
   return (
     <IonPage>
-      <IonContent>
-        <div className="container mx-auto p-4">
+      <IonContent className="ion-padding">
+        <div className="container mx-auto">
           <div className="bg-white rounded-lg shadow-sm">
             <div className="p-4 border-b">
               <h2 className="text-2xl font-bold text-center">

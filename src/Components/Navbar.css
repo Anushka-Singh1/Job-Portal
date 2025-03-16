@@ -35,20 +35,11 @@ ion-button.selected {
   --min-height: 56px;
   --padding-start: 16px;
   --padding-end: 16px;
-  display: flex;
-  align-items: center;
 }
 
 .menu-button {
   --color: white;
   margin: 0;
-}
-
-.logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
 }
 
 .logo-button {

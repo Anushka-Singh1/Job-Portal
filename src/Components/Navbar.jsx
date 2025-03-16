@@ -15,7 +15,7 @@ function Navbar() {
   const location = useLocation();
 
   const navItems = [
-    { to: "/", icon: <FaHome className="h-6 w-6" />, label: "Home" },
+    { to: "/jobs", icon: <FaHome className="h-6 w-6" />, label: "Home" },
     { to: "/about", icon: <IoNewspaper className="h-6 w-6" />, label: "About" },
     {
       to: "/applied",
@@ -36,7 +36,7 @@ function Navbar() {
             className={location.pathname === item.to ? 'selected' : ''}
             button
           >
-            <div className="flex items-end mr-2 w-full py-2 ">
+            <div className="flex items-end mr-2 w-full py-2">
               {item.icon}
               <IonLabel className="ml-2">{item.label}</IonLabel>
             </div>

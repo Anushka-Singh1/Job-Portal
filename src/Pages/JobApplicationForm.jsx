@@ -16,6 +16,7 @@ import {
   useIonToast
 } from '@ionic/react';
 import Footer from "../Components/Footer";
+import './JobApplicationForm.css';
 
 const JobApplicationForm = () => {
   const { id } = useParams();
@@ -123,25 +124,27 @@ const JobApplicationForm = () => {
             <IonCard>
               <IonCardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <IonItem>
-                    <IonLabel position="floating">Name</IonLabel>
+                  <IonItem className="custom-input" lines="full">
+                    <IonLabel position="floating" color="dark">Name</IonLabel>
                     <IonInput
                       value={formState.name}
                       onIonInput={e => handleInputChange('name', e.detail.value)}
                       required
                       type="text"
                       placeholder="Enter your full name"
+                      className="custom-input"
                     />
                   </IonItem>
 
-                  <IonItem>
-                    <IonLabel position="floating">Resume Link</IonLabel>
+                  <IonItem className="custom-input" lines="full">
+                    <IonLabel position="floating" color="dark">Resume Link</IonLabel>
                     <IonInput
                       value={formState.resumeLink}
                       onIonInput={e => handleInputChange('resumeLink', e.detail.value)}
                       required
                       type="url"
                       placeholder="Enter your resume URL"
+                      className="custom-input"
                     />
                   </IonItem>
 

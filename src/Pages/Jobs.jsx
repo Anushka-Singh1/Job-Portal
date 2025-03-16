@@ -11,12 +11,12 @@ function Jobs() {
   return (
     <IonPage>
       <IonContent>
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 p-4">
-          <div className="lg:col-span-1 bg-white rounded-lg shadow-sm">
+        <div className="p-4">
+          <div className="bg-white rounded-lg shadow-sm mb-4">
             <FilterSection />
           </div>
-          <div className="lg:col-span-5 bg-white rounded-lg shadow-sm flex flex-col">
-            <div className="p-4 border-b">
+          <div className="bg-white rounded-lg shadow-sm flex flex-col">
+            <div className="px-4 border-b">
               <p className="text-gray-700 font-medium text-center">
                 {filter_jobs ? filter_jobs.length : 0} Jobs Found
               </p>

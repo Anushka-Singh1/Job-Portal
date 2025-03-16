@@ -1,0 +1,21 @@
+.custom-input {
+  --highlight-color: var(--ion-color-dark);
+  --highlight-height: 2px;
+}
+
+.custom-input ion-input {
+  --color: var(--ion-color-dark);
+  --placeholder-color: var(--ion-color-medium);
+}
+
+.custom-input.item-has-focus {
+  --highlight-background: var(--ion-color-dark);
+}
+
+.custom-input.item-has-focus ion-label {
+  color: var(--ion-color-dark) !important;
+}
+
+.custom-input ion-label {
+  color: var(--ion-color-dark) !important;
+} 

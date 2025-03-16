@@ -1,6 +1,6 @@
 // import "./App.css";
 import "../src/index.css";
-import React from "react";
+import React, { useEffect } from 'react';
 import { Redirect, Route } from "react-router-dom";
 import { 
   IonApp, 
@@ -15,9 +15,11 @@ import {
   IonTitle,
   IonButtons,
   IonMenuButton,
-  IonButton
+  IonButton,
+  useIonRouter
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import { App as CapacitorApp } from '@capacitor/app';
 import About from "./Pages/About";
 import Jobs from "./Pages/Jobs";
 import SingleJob from "./Pages/SingleJob";
@@ -32,7 +34,26 @@ setupIonicReact({
   mode: 'md'
 });
 
-function App() {
+const App = () => {
+  const ionRouter = useIonRouter();
+
+  useEffect(() => {
+    const handleBackButton = () => {
+      const currentPath = window.location.pathname;
+      if (currentPath === '/jobs') {
+        CapacitorApp.exitApp();
+      } else {
+        ionRouter.goBack();
+      }
+    };
+
+    CapacitorApp.addListener('backButton', handleBackButton);
+
+    return () => {
+      CapacitorApp.removeAllListeners();
+    };
+  }, [ionRouter]);
+
   return (
     <IonApp>
       <IonReactRouter>
@@ -83,6 +104,6 @@ function App() {
       </IonReactRouter>
     </IonApp>
   );
-}
+};
 
 export default App;

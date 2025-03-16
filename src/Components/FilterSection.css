@@ -1,19 +1,79 @@
 .filter-section {
-  padding: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  overflow: hidden;
 }
 
-.filter-section ion-select {
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --padding-top: 12px;
-  --padding-bottom: 12px;
-  --border-radius: 8px;
+.filter-toolbar {
+  --background: transparent;
+  --border-style: none;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.filter-scroll-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  width: 100%;
+  max-width: 100vw;
+}
+
+.filter-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 0.5rem;
+  width: max-content;
+}
+
+.filter-item {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 150px;
+}
+
+.filter-item ion-label {
+  color: var(--ion-color-dark);
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  padding-left: 4px;
+}
+
+.filter-item ion-select {
+  --padding-start: 12px;
+  --padding-end: 8px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --border-radius: 4px;
   --background: var(--ion-color-light);
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  width: 100%;
 }
 
-.filter-section ion-select::part(icon) {
+.filter-item ion-select::part(icon) {
   color: var(--ion-color-dark);
   opacity: 1;
+}
+
+.filter-item .clear-button {
+  margin: 0;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  height: 41px;
+  font-size: 14px;
+  width: 100%;
 }
 
 .filter-section ion-button {
@@ -30,9 +90,31 @@
   --padding-start: 0;
   --inner-padding-end: 0;
   --background: transparent;
+  --border-color: transparent;
 }
 
 .filter-section h3 {
   margin: 0;
   font-weight: 500;
+}
+
+.filter-section ion-label {
+  --color: var(--ion-color-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .filter-container {
+    flex-wrap: wrap;
+  }
+  
+  .filter-container ion-select {
+    flex: 1 1 calc(33.33% - 8px);
+    max-width: none;
+  }
+  
+  .filter-container .clear-button {
+    margin-left: auto;
+  }
 } 
